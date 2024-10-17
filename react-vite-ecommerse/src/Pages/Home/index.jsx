@@ -1,8 +1,13 @@
+import Layout from "../../Component/Layout"
+import Card from "../../Component/Card/indesx"
+
 const Home = () => {
   return (
-    <div className='bg-red-100'>
-        Home      
-    </div>
+    <Layout>
+     Home  
+      
+     <Card />   
+    </Layout>
   )
 }
 
