@@ -7,7 +7,7 @@ const Card = (data) => {
   const context = useContext(ShoppingCartContext)
   
   return (
-    <div className='bg-white cursor-pointer w-56 h-auto rounded-lg'>
+    <div className='bg-white cursor-pointer w-32 h-full rounded-full'>
       <figure className='relative mb-2 w-full h-4/5'>
         <span className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5' >
           {data.data.category.name}
@@ -21,8 +21,8 @@ const Card = (data) => {
         </div>
       </figure>
       <p className='flex justify-between'>
-        <span className='text-sm font-light'>{data.data.title}</span>
-        <span className='text-sm font-medium'>${data.data.price}</span>
+        <span className='text-xs font-light'>{data.data.title}</span>
+        <span className='text-md font-medium'>${data.data.price}</span>
       </p>
     </div>
   )
