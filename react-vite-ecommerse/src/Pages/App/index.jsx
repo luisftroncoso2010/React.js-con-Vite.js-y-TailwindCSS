@@ -1,5 +1,5 @@
 import { BrowserRouter, useRoutes } from 'react-router-dom'
-import ShoppingCartProvider from '../../Context'
+import { ShoppingCartProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
@@ -8,6 +8,7 @@ import NotFound from '../NotFound'
 import SignIn from '../Signin'
 import Navbar from '../../Component/Navbar'
 import './App.css'
+
 
 /* Funcion para retornar las rutas */
 const AppRoutes = () => {
@@ -23,9 +24,9 @@ const AppRoutes = () => {
 }
 
 
-function App() {
-  
+function App() {  
   return (
+    /* Se hace uso del contesto ya con el provaider */
     <ShoppingCartProvider>
       <BrowserRouter>    
         <AppRoutes />

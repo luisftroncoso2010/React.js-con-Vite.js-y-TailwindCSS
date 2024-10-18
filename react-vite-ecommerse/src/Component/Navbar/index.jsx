@@ -1,7 +1,11 @@
+import { useContext } from 'react'
+import { ShoppingCartContext } from '../../Context';
 import { NavLink } from "react-router-dom"
 
+
 const Navbar = () => {
-  const activeStyle = 'underline underline-offset-4'  
+  const context = useContext(ShoppingCartContext);
+  const activeStyle = 'underline underline-offset-4';
 
   return (
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light font-normal">
@@ -105,7 +109,7 @@ const Navbar = () => {
                 </NavLink>
             </li>
             <li>
-               🛒 0
+               🛒 {context.count}
             </li>            
         </ul>     
     </nav>    
