@@ -5,25 +5,25 @@ import ProductDetail from "../../Component/ProductDetail"
 
 const Home = () => {
 
-    const [items, setItems] = useState(null); 
-    useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/products')
-            .then(response => response.json())
-            .then(data => setItems(data))
-      }, [])
-     console.log(items);
-      
-  return (
-    <Layout>
+  const [items, setItems] = useState(null); 
+
+  useEffect(() => {
+      fetch('https://api.escuelajs.co/api/v1/products')
+          .then(response => response.json())
+          .then(data => setItems(data))
+    }, [])
+    
+    return (
+      <Layout>
      Home 
-     <div className='grid gap-x-0 gap-y-10 grid-cols-4 w-full max-w-screen-md'>
+     <div className='grid gap-x-0 gap-y-10 grid-cols-4 w-full max-w-screen-sm'>
         {
           items?.map((item) => (
-          <Card key={item.id} data={item} />
+            <Card key={item.id} data={item} />
           ))     
         } 
      </div>
-     <ProductDetail />
+      <ProductDetail />          
     </Layout>
   )
 }
