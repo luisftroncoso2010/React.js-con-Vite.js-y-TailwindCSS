@@ -14,9 +14,16 @@ const ShoppingCartProvider = ({ children }) => {
   const openProducDetail = () => setIsProductDetailOpen(true)
   const closeProducDetail = () => setIsProductDetailOpen(false)
   
+  // Ceckput Side Menu Detail - Open/Close
+  const [isCheckOutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false)
+  const openCheckOutSideMenu = () => setIsCheckoutSideMenuOpen(true)
+  const closeCheckOutSideMenu = () => setIsCheckoutSideMenuOpen(false)
+  
   // Poduct detail - Show product
   const [productToShow, setProductToShow] = useState({}); 
-  //console.log(productToShow);
+  
+  //  Shopping  Cart . Add products to cart
+  const [cartProducts, setcartProducts] = useState([]); 
   
   return (    
     /* Se usa el contesto y se le coloca el provaider */
@@ -28,7 +35,12 @@ const ShoppingCartProvider = ({ children }) => {
         openProducDetail,
         closeProducDetail,
         productToShow, 
-        setProductToShow       
+        setProductToShow,
+        cartProducts, 
+        setcartProducts,
+        isCheckOutSideMenuOpen,
+        openCheckOutSideMenu,
+        closeCheckOutSideMenu
       }}
     >
       {children}    

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Layout from "../../Component/Layout"
-import Card from "../../Component/Card/indesx"
+import Card from "../../Component/Card"
 import ProductDetail from "../../Component/ProductDetail"
 
 const Home = () => {
