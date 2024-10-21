@@ -21,7 +21,7 @@ const CheckOuteSideMenu = () => {
           </div>
         </div>
 
-        <div className='px-3'>
+        <div className='px-3 overflow-y-scroll'>
           {
             context.cartProducts.map((product) => (
               <OrderCard
