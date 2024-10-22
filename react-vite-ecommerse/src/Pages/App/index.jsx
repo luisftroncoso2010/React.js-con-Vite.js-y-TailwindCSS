@@ -25,7 +25,6 @@ const AppRoutes = () => {
   return routes
 }
 
-
 function App() {  
   return (
     /* Se hace uso del contesto ya con el provaider */

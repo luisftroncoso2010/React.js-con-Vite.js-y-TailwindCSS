@@ -27,9 +27,7 @@ const ShoppingCartProvider = ({ children }) => {
 
   // Shopping cart * Order
   const [ order, setOrder ] = useState([])
-  console.log('Order', order);
-  
-
+ 
   return (    
     /* Se usa el contesto y se le coloca el provaider */
     <ShoppingCartContext.Provider 

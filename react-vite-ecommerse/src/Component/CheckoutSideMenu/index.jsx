@@ -21,7 +21,7 @@ const CheckOuteSideMenu = () => {
     /* Se crea una objeto nuevo, para cada nueva orden.*/
     const orderToAdd = {
       date: '0.1.02.23',
-      product: context.cartProducts,
+      products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts)
     }
