@@ -24,7 +24,12 @@ const ShoppingCartProvider = ({ children }) => {
   
   //  Shopping  Cart . Add products to cart
   const [cartProducts, setcartProducts] = useState([]); 
+
+  // Shopping cart * Order
+  const [ order, setOrder ] = useState([])
+  console.log('Order', order);
   
+
   return (    
     /* Se usa el contesto y se le coloca el provaider */
     <ShoppingCartContext.Provider 
@@ -40,7 +45,9 @@ const ShoppingCartProvider = ({ children }) => {
         setcartProducts,
         isCheckOutSideMenuOpen,
         openCheckOutSideMenu,
-        closeCheckOutSideMenu
+        closeCheckOutSideMenu,
+        order, 
+        setOrder
       }}
     >
       {children}    
