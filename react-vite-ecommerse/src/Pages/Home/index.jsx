@@ -11,18 +11,18 @@ const Home = () => {
       fetch('https://api.escuelajs.co/api/v1/products')
           .then(response => response.json())
           .then(data => setItems(data))
-    }, [])
+    }, [])    
     
     return (
       <Layout>
-     Home 
+      Home 
      <div className='grid gap-x-0 gap-y-10 grid-cols-4 w-full max-w-screen-sm'>
         {
           items?.map((item) => (
             <Card key={item.id} data={item} />
           ))     
         } 
-     </div>
+      </div>
       <ProductDetail />          
     </Layout>
   )

@@ -24,9 +24,9 @@ const ShoppingCartProvider = ({ children }) => {
   
   //  Shopping  Cart . Add products to cart
   const [cartProducts, setcartProducts] = useState([]); 
-
+    
   // Shopping cart * Order
-  const [ order, setOrder ] = useState([])
+  const [ order, setOrder ] = useState([]) 
  
   return (    
     /* Se usa el contesto y se le coloca el provaider */
