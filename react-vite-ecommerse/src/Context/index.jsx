@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 
 /* Se crea el contexto */
 const ShoppingCartContext = createContext()
@@ -27,6 +27,18 @@ const ShoppingCartProvider = ({ children }) => {
     
   // Shopping cart * Order
   const [ order, setOrder ] = useState([]) 
+
+  // Get products
+  const [items, setItems] = useState(null)
+
+  // Ger products by title - Captar 
+  const [ searchByTitle, setsearchByTitle ] = useState(null)
+  
+  useEffect(() => {
+      fetch('https://api.escuelajs.co/api/v1/products')
+          .then(response => response.json())
+          .then(data => setItems(data))
+    }, [])   
  
   return (    
     /* Se usa el contesto y se le coloca el provaider */
@@ -45,7 +57,11 @@ const ShoppingCartProvider = ({ children }) => {
         openCheckOutSideMenu,
         closeCheckOutSideMenu,
         order, 
-        setOrder
+        setOrder,
+        items,
+        setItems,
+        searchByTitle, 
+        setsearchByTitle
       }}
     >
       {children}    
