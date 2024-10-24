@@ -5,9 +5,8 @@ import { ShoppingCartContext } from '../../Context';
 import ProductDetail from "../../Component/ProductDetail"
 
 const Home = () => {
-
   const context = useContext(ShoppingCartContext)
-
+    
   const renderView = () => {
     if(context.searchByTitle?.length > 0){
       if(context.filteredItems?.length > 0){

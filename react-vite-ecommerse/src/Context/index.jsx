@@ -30,29 +30,59 @@ const ShoppingCartProvider = ({ children }) => {
 
   // Get products
   const [items, setItems] = useState(null)
+    
   // Filtrador
   const [filteredItems, setFilteredItems] = useState(null)
 
   // Get products by title - Captar 
   const [ searchByTitle, setsearchByTitle ] = useState(null)
+
+  // Ger product by Category - Captar
+  const [ searchByCategory, setSearchByCategory ] = useState(null)
+  console.log('SearchByCategory: ', searchByCategory);
   
+    
   useEffect(() => {
-      fetch('https://api.escuelajs.co/api/v1/products')
-          .then(response => response.json())
-          .then(data => setItems(data))
-    }, [])   
+    fetch('https://api.escuelajs.co/api/v1/products')
+        .then(response => response.json())
+        .then(data => setItems(data))
+  }, [])   
 
-    // Filter by Article
-    const filteredItemsByTitle = (items, searchByTitle) =>{
-      return items?.filter((item) => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+  // Filter by Article. 
+  const filteredItemsByTitle = (items, searchByTitle) =>{
+    return items?.filter((item) => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+  }
+
+  // Filter by Category. Funcion para filtrar productos por categoria. Deja los productos que cumplen dicha categori
+  const filteredItemsByCategory = (items, searchByCategory) => {           
+    // Filtramo si cumple con dicha categoria seleccionada. 
+    return items?.filter(item => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
+  }
+
+  // funcion para intercambiar para filtar por titulo o categoria
+  const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+    if (searchType === 'BY_TITLE'){
+      return filteredItemsByTitle(items, searchByTitle)
     }
-
-    useEffect(() => {
-      if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
-    }, [ items, searchByTitle ])  
-    console.log('Items: ', items);
-    console.log('Search: ', searchByTitle)    
-    console.log('Filtered:', filteredItems)
+    if (searchType === 'BY_CATEGORY'){
+      return filteredItemsByCategory(items, searchByCategory)
+    }
+    if (searchType === 'BY_TITLE_AND_CATEGORY'){
+      return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+    if (!searchType){
+      return items
+    }
+  }
+  
+  // Efecto para cargar los titulos y categorias de title.
+  useEffect(() => {
+    if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+    if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
+    if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+    if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+  }, [ items, searchByTitle, searchByCategory ])  
+    
     
   return (    
     /* Se usa el contesto y se le coloca el provaider */
@@ -77,7 +107,9 @@ const ShoppingCartProvider = ({ children }) => {
         searchByTitle, 
         setsearchByTitle,
         filteredItems, 
-        setFilteredItems
+        setFilteredItems,
+        searchByCategory, 
+        setSearchByCategory 
       }}
     >
       {children}    
