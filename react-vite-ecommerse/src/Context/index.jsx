@@ -30,8 +30,10 @@ const ShoppingCartProvider = ({ children }) => {
 
   // Get products
   const [items, setItems] = useState(null)
+  // Filtrador
+  const [filteredItems, setFilteredItems] = useState(null)
 
-  // Ger products by title - Captar 
+  // Get products by title - Captar 
   const [ searchByTitle, setsearchByTitle ] = useState(null)
   
   useEffect(() => {
@@ -39,7 +41,19 @@ const ShoppingCartProvider = ({ children }) => {
           .then(response => response.json())
           .then(data => setItems(data))
     }, [])   
- 
+
+    // Filter by Article
+    const filteredItemsByTitle = (items, searchByTitle) =>{
+      return items?.filter((item) => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+
+    useEffect(() => {
+      if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
+    }, [ items, searchByTitle ])  
+    console.log('Items: ', items);
+    console.log('Search: ', searchByTitle)    
+    console.log('Filtered:', filteredItems)
+    
   return (    
     /* Se usa el contesto y se le coloca el provaider */
     <ShoppingCartContext.Provider 
@@ -61,7 +75,9 @@ const ShoppingCartProvider = ({ children }) => {
         items,
         setItems,
         searchByTitle, 
-        setsearchByTitle
+        setsearchByTitle,
+        filteredItems, 
+        setFilteredItems
       }}
     >
       {children}    
