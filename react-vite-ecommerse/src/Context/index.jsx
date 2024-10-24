@@ -29,18 +29,18 @@ const ShoppingCartProvider = ({ children }) => {
   const [ order, setOrder ] = useState([]) 
 
   // Get products
-  const [items, setItems] = useState(null)
-    
+  const [items, setItems] = useState(null)  
+  
   // Filtrador
   const [filteredItems, setFilteredItems] = useState(null)
 
+  
   // Get products by title - Captar 
   const [ searchByTitle, setsearchByTitle ] = useState(null)
 
   // Ger product by Category - Captar
   const [ searchByCategory, setSearchByCategory ] = useState(null)
-  console.log('SearchByCategory: ', searchByCategory);
-  
+ 
     
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products')
@@ -50,7 +50,7 @@ const ShoppingCartProvider = ({ children }) => {
 
   // Filter by Article. 
   const filteredItemsByTitle = (items, searchByTitle) =>{
-    return items?.filter((item) => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
   }
 
   // Filter by Category. Funcion para filtrar productos por categoria. Deja los productos que cumplen dicha categori
@@ -83,7 +83,11 @@ const ShoppingCartProvider = ({ children }) => {
     if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
   }, [ items, searchByTitle, searchByCategory ])  
     
-    
+  console.log('SearchByTitle: ', searchByTitle);
+  console.log('searchByCategory: ', searchByCategory);
+  console.log('filteredItems', filteredItems);
+  
+  
   return (    
     /* Se usa el contesto y se le coloca el provaider */
     <ShoppingCartContext.Provider 
